@@ -17,6 +17,15 @@ export default function Footer() {
             </a>
             <span class="text-surface-200">·</span>
             <a
+              href="https://github.com/iagovar/hantavirus/"
+              target="_blank"
+              rel="noopener noreferrer"
+              class="hover:text-brand-600 transition"
+            >
+              GitHub
+            </a>
+            <span class="text-surface-200">·</span>
+            <a
               href="https://iagovar.com"
               target="_blank"
               rel="noopener noreferrer"
