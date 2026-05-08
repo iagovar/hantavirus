@@ -1,0 +1,13 @@
+node_modules/
+/assets/
+.env
+backend/pocketbase
+backend/pb_data/
+backend/pb_migrations/
+backend/CHANGELOG.md
+backend/LICENSE.md
+tmp/
+cgi-bin/
+.well-known/
+*.log
+.kilo/

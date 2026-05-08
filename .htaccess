@@ -1,0 +1,24 @@
+# END cPanel-generated php ini directives, do not edit
+# DO NOT REMOVE. CLOUDLINUX PASSENGER CONFIGURATION BEGIN
+# PassengerAppRoot "/home/$USER/public_html/hantavirus.iagovar.com"
+# PassengerBaseURI "/"
+# PassengerNodejs "/home/$USER/nodevenv/public_html/hantavirus.iagovar.com/24/bin/node"
+# PassengerAppType node
+# PassengerStartupFile index.html
+# DO NOT REMOVE. CLOUDLINUX PASSENGER CONFIGURATION END
+
+<IfModule mod_rewrite.c>
+    RewriteEngine On
+    
+    # Proxy api to PocketBase
+    RewriteRule ^api/(.*)$ http://127.0.0.1:60123/api/$1 [P,L]
+    
+    # Proxy dashboard to PocketBase
+    RewriteRule ^_/(.*)$ http://127.0.0.1:60123/_/$1 [P,L]
+
+    # Map everything else to dist folder
+    RewriteCond %{REQUEST_URI} !^/dist/
+    RewriteCond %{REQUEST_URI} !^/api/
+    RewriteCond %{REQUEST_URI} !^/_/
+    RewriteRule ^(.*)$ dist/$1 [L]
+</IfModule>
