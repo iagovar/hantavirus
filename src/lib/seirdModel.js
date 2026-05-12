@@ -85,7 +85,7 @@ export const DEFAULTS = {
   infectiousPeriodDays: 14,
   incubationPeriodDays: 21,
   caseFatalityRatio: 0.32,
-  simulationDays: 730,
+  simulationDays: 365,
 };
 
 // ---------------------------------------------------------------------------
