@@ -118,6 +118,13 @@ export default function MapSection(props) {
         )}
       </div>
 
+      <div class="bg-amber-50 border border-amber-200 rounded-xl px-4 py-3 text-sm text-amber-800">
+        <span class="font-semibold">Volunteers needed</span> — Help keep case data up to date.{' '}
+        <a href="https://x.com/iagovar" target="_blank" rel="noopener noreferrer" class="text-amber-900 underline underline-offset-2 hover:text-amber-950 font-medium">
+          Contact @iagovar on X
+        </a>
+      </div>
+
       {showForm() && (
         <CaseForm
           formData={formData} setFormData={setFormData}
