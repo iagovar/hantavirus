@@ -24,6 +24,16 @@ export default function ModelSection() {
             Epuyén outbreak study (NEJM)
           </a>.
         </p>
+        <p class="text-xs text-surface-400 mt-1">
+          <a
+            href="https://github.com/iagovar/hantavirus/blob/main/src/lib/seirdModel.js"
+            target="_blank"
+            rel="noopener noreferrer"
+            class="hover:text-brand-600 underline underline-offset-2 transition"
+          >
+            Audit the model source code
+          </a>
+        </p>
       </div>
 
       <ModelMetrics
