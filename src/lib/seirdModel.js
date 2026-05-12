@@ -79,7 +79,7 @@
  *   - CFR ≈ 32%
  */
 export const DEFAULTS = {
-  totalPopulation: 1000000,
+  totalPopulation: 8000000000,
   initialInfectious: 1,
   basicReproductionNumber: 2.12,
   infectiousPeriodDays: 14,
