@@ -6,11 +6,13 @@ Chart.register(...registerables);
 export default function SIRChart(props) {
   let chartCanvas;
   let chartInstance;
-  const [logScale, setLogScale] = createSignal(false);
+  const [logScale, setLogScale] = createSignal(true);
+  let todayDayRef = null;
 
   createEffect(() => {
     const data = props.results();
     const isLog = logScale();
+    todayDayRef = props.todayMarker?.() ?? null;
     if (!chartCanvas || data.length === 0) return;
 
     const labels = data.map((d) => d.day);
@@ -116,6 +118,36 @@ export default function SIRChart(props) {
           },
         },
       },
+      plugins: [{
+        id: 'todayLine',
+        afterDraw(chart) {
+          const day = todayDayRef;
+          if (day == null) return;
+          const { ctx, chartArea, scales } = chart;
+          const x = scales.x.getPixelForValue(day);
+          if (x < chartArea.left || x > chartArea.right) return;
+
+          ctx.save();
+          ctx.beginPath();
+          ctx.setLineDash([6, 4]);
+          ctx.strokeStyle = '#6b7280';
+          ctx.lineWidth = 2;
+          ctx.moveTo(x, chartArea.top);
+          ctx.lineTo(x, chartArea.bottom);
+          ctx.stroke();
+          ctx.setLineDash([]);
+
+          ctx.font = "600 12px 'Inter', sans-serif";
+          ctx.fillStyle = '#6b7280';
+          ctx.textAlign = 'center';
+          ctx.textBaseline = 'middle';
+          ctx.translate(x, (chartArea.top + chartArea.bottom) / 2);
+          ctx.rotate(-Math.PI / 2);
+          ctx.fillText(`You are here (${day} days since 1st case)`, 0, 8);
+
+          ctx.restore();
+        },
+      }],
     };
 
     if (chartInstance) {

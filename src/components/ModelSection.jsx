@@ -1,12 +1,29 @@
+import { onMount } from 'solid-js';
 import { useSEIRDModel } from '../lib/useSEIRDModel';
 import SIRChart from './ModelSectionComponents/SIRChart';
 import ModelControls from './ModelSectionComponents/ModelControls';
 import ModelMetrics from './ModelSectionComponents/ModelMetrics';
 import StudySummary from './ModelSectionComponents/StudySummary';
 
-export default function ModelSection() {
+export default function ModelSection(props) {
   const model = useSEIRDModel();
   const { params, results, setters, reset } = model;
+
+  onMount(() => {
+    const allCases = props.cases?.();
+    if (!allCases || allCases.length === 0) {
+      props.loadCases?.();
+    }
+  });
+
+  const daysSinceFirstCase = () => {
+    const allCases = props.cases?.();
+    if (!allCases || allCases.length === 0) return null;
+    const sorted = [...allCases].sort((a, b) => new Date(a.date) - new Date(b.date));
+    const firstDate = new Date(sorted[0].date);
+    const ms = Date.now() - firstDate.getTime();
+    return Math.max(1, Math.ceil(ms / (1000 * 60 * 60 * 24)));
+  };
 
   return (
     <section id="model-section" class="space-y-8">
@@ -45,7 +62,7 @@ export default function ModelSection() {
       />
 
       <div class="grid grid-cols-1 lg:grid-cols-3 gap-6">
-        <SIRChart results={results} />
+        <SIRChart results={results} todayMarker={daysSinceFirstCase} />
         <ModelControls
           totalPopulation={params.totalPopulation} setTotalPopulation={setters.setTotalPopulation}
           initialInfectious={params.initialInfectious} setInitialInfectious={setters.setInitialInfectious}

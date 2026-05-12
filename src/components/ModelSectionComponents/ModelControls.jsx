@@ -117,7 +117,7 @@ export default function ModelControls(props) {
         value={simulationDays()}
         onChange={setSimulationDays}
         min={30}
-        max={730}
+        max={1460}
         step={1}
         format={(v) => `${v} days`}
       />

@@ -46,7 +46,7 @@ export default function App() {
           ? <MapSection cases={cases} createCase={createCase} />
           : activeTab() === 'history'
             ? <CaseHistorySection cases={cases} createCase={createCase} updateCase={updateCase} deleteCase={deleteCase} />
-            : <ModelSection />
+            : <ModelSection cases={cases} loadCases={loadCases} />
         }
       </main>
 
